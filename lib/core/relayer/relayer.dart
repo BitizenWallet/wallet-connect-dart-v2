@@ -151,7 +151,7 @@ class Relayer with Events implements IRelayer {
   // ---------- Private ----------------------------------------------- //
 
   Future<IJsonRpcProvider> _createProvider() async {
-    final auth = await core.crypto.signJWT(relayUrl);
+    final auth = await core.crypto.signJWT(RELAYER_DEFAULT_RELAY_URL);
     return JsonRpcProvider(
       WsConnection(
         formatRelayRpcUrl(
