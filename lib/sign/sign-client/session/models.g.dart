@@ -82,15 +82,18 @@ SessionStruct _$SessionStructFromJson(Map<String, dynamic> json) =>
         (k, e) =>
             MapEntry(k, SessionNamespace.fromJson(e as Map<String, dynamic>)),
       ),
+      self: SessionPublicKeyMetadata.fromJson(
+          json['self'] as Map<String, dynamic>),
+      peer: SessionPublicKeyMetadata.fromJson(
+          json['peer'] as Map<String, dynamic>),
       requiredNamespaces:
           (json['requiredNamespaces'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
             k, ProposalRequiredNamespace.fromJson(e as Map<String, dynamic>)),
       ),
-      self: SessionPublicKeyMetadata.fromJson(
-          json['self'] as Map<String, dynamic>),
-      peer: SessionPublicKeyMetadata.fromJson(
-          json['peer'] as Map<String, dynamic>),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$SessionStructToJson(SessionStruct instance) {
@@ -113,5 +116,6 @@ Map<String, dynamic> _$SessionStructToJson(SessionStruct instance) {
       instance.requiredNamespaces?.map((k, e) => MapEntry(k, e.toJson())));
   val['self'] = instance.self.toJson();
   val['peer'] = instance.peer.toJson();
+  writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   return val;
 }

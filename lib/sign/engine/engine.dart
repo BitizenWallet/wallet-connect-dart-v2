@@ -211,6 +211,7 @@ class Engine with Events implements IEngine {
         publicKey: proposer.publicKey,
         metadata: proposer.metadata,
       ),
+      createdAt: DateTime.now(),
     );
 
     await client.session.set(sessionTopic, session);

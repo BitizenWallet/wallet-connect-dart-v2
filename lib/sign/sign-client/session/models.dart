@@ -137,17 +137,19 @@ class SessionStruct {
 
   final SessionPublicKeyMetadata peer;
 
-  const SessionStruct({
-    required this.topic,
-    required this.relay,
-    required this.expiry,
-    required this.acknowledged,
-    required this.controller,
-    required this.namespaces,
-    this.requiredNamespaces,
-    required this.self,
-    required this.peer,
-  });
+  final DateTime? createdAt;
+
+  const SessionStruct(
+      {required this.topic,
+      required this.relay,
+      required this.expiry,
+      required this.acknowledged,
+      required this.controller,
+      required this.namespaces,
+      required this.self,
+      required this.peer,
+      this.requiredNamespaces,
+      this.createdAt});
 
   factory SessionStruct.fromJson(Map<String, dynamic> json) =>
       _$SessionStructFromJson(json);
@@ -164,6 +166,7 @@ class SessionStruct {
     ProposalRequiredNamespaces? requiredNamespaces,
     SessionPublicKeyMetadata? self,
     SessionPublicKeyMetadata? peer,
+    DateTime? createdAt,
   }) {
     return SessionStruct(
       topic: topic ?? this.topic,
@@ -175,6 +178,7 @@ class SessionStruct {
       requiredNamespaces: requiredNamespaces ?? this.requiredNamespaces,
       self: self ?? this.self,
       peer: peer ?? this.peer,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 }
